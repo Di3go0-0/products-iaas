@@ -26,8 +26,8 @@ export class LinksService {
     return link;
   }
 
-  async findBySaleId(saleId: string): Promise<ProductLink> {
-    const link = await this.linkRepo.findOne({ where: { id: saleId } });
+  async findBySaleId(id: string): Promise<ProductLink> {
+    const link = await this.linkRepo.findOne({ where: { id } });
     if (!link) throw new NotFoundException('Enlace no encontrado para venta');
     return link;
   }
