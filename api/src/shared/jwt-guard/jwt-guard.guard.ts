@@ -18,8 +18,6 @@ export class JwtGuardGuard implements CanActivate {
     const request = context.switchToHttp().getRequest<Request>();
     const token = this.extractTokenFromHeader(request);
 
-    this.logger.debug(token)
-
     if (!token) {
       this.logger.warn('No token found in Authorization header');
       throw new UnauthorizedException('Authentication token required.');
@@ -29,7 +27,10 @@ export class JwtGuardGuard implements CanActivate {
       uri + token,
     );
 
-    this.logger.debug(response)
+    if (!response) {
+      this.logger.warn('No token found in Authorization header');
+      throw new UnauthorizedException('Authentication token required.');
+    }
 
 
     return true;

@@ -1,0 +1,30 @@
+services:
+  products-postgres:
+    image: postgres:14
+    container_name: products-postgres
+    restart: always
+    env_file:
+      - ./.env
+    volumes:
+      - products_db_data:/var/lib/postgresql/data
+      - './docker/initdb:/docker-entrypoint-initdb.d'
+    ports:
+      - '5433:5432'
+
+  products2-postgres:
+    image: postgres:14
+    container_name: products2-postgres
+    restart: always
+    env_file:
+      - ./.env
+    volumes:
+      - products2_db_data:/var/lib/postgresql/data
+      - './docker/initdb:/docker-entrypoint-initdb.d'
+    ports:
+      - '5434:5432'
+
+volumes:
+  products_db_data:
+    name: products_db_data
+  products2_db_data:
+    name: products2_db_data
