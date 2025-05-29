@@ -7,8 +7,19 @@ import { LinksDbModule } from './links-db/links-db.module';
 import { LinksModule } from './links/links.module';
 import { SaleModule } from './sale/sale.module';
 import { DescriptionsModule } from './descriptions/descriptions.module';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
-  imports: [JwtGuardModule, AxiosModule, DescriptionsDbModule, SaleDbModule, LinksDbModule, LinksModule, SaleModule, DescriptionsModule]
+  imports: [
+    JwtGuardModule,
+    AxiosModule,
+    DescriptionsDbModule,
+    SaleDbModule,
+    LinksDbModule,
+    LinksModule,
+    SaleModule,
+    DescriptionsModule,
+    DatabaseModule
+  ]
 })
 export class SharedModule { }

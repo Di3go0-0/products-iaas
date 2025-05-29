@@ -5,12 +5,14 @@ import { ModulesModule } from './modules/modules.module';
 import { DescriptionsDbModule } from './shared/descriptions-db/descriptions-db.module';
 import { SaleDbModule } from './shared/sale-db/sale-db.module';
 import { LinksDbModule } from './shared/links-db/links-db.module';
+import { DatabaseModule } from './shared/database/database.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true, }),
     ModulesModule, SharedModule,
 
+    DatabaseModule,
     DescriptionsDbModule,
     SaleDbModule,
     LinksDbModule,

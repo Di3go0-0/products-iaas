@@ -1,30 +1,46 @@
+version: '3.8'
+
 services:
-  products-postgres:
-    image: postgres:14
-    container_name: products-postgres
-    restart: always
-    env_file:
-      - ./.env
+  postgres-primary:
+    image: bitnami/postgresql:14
+    container_name: postgres-primary
+    environment:
+      - POSTGRESQL_USERNAME=postgres
+      - POSTGRESQL_PASSWORD=postgrespw
+
+      - POSTGRESQL_DATABASE=product_descriptions_db
+
+      - POSTGRESQL_REPLICATION_MODE=master
+      - POSTGRESQL_REPLICATION_USER=repl_user
+      - POSTGRESQL_REPLICATION_PASSWORD=repl_pass
     volumes:
-      - products_db_data:/var/lib/postgresql/data
-      - './docker/initdb:/docker-entrypoint-initdb.d'
+      - primary_data:/bitnami/postgresql
+      - ./docker/initdb-master:/docker-entrypoint-initdb.d
     ports:
       - '5433:5432'
 
-  products2-postgres:
-    image: postgres:14
-    container_name: products2-postgres
-    restart: always
-    env_file:
-      - ./.env
+  postgres-replica:
+    image: bitnami/postgresql:14
+    container_name: postgres-replica
+    depends_on:
+      - postgres-primary
+    environment:
+      - POSTGRESQL_USERNAME=postgres
+      - POSTGRESQL_PASSWORD=postgrespw
+
+      - POSTGRESQL_REPLICATION_MODE=slave
+      - POSTGRESQL_REPLICATION_USER=repl_user
+      - POSTGRESQL_REPLICATION_PASSWORD=repl_pass
+
+      - POSTGRESQL_MASTER_HOST=postgres-primary
+      - POSTGRESQL_MASTER_PORT_NUMBER=5432
     volumes:
-      - products2_db_data:/var/lib/postgresql/data
-      - './docker/initdb:/docker-entrypoint-initdb.d'
+      - replica_data:/bitnami/postgresql
     ports:
       - '5434:5432'
 
 volumes:
-  products_db_data:
-    name: products_db_data
-  products2_db_data:
-    name: products2_db_data
+  primary_data:
+    name: pg_primary_data
+  replica_data:
+    name: pg_replica_data
