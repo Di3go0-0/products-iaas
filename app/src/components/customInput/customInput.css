@@ -1,0 +1,50 @@
+.form-group {
+  margin: 0;
+  padding: 0;
+}
+
+/* input:-webkit-autofill, */
+/* input:-webkit-autofill:hover, */
+/* input:-webkit-autofill:focus, */
+/* input:-webkit-autofill:active { */
+/*   -webkit-box-shadow: 0 0 0 30px rgba(0, 0, 0, 0) inset !important; */
+/*   -webkit-text-fill-color: white !important; */
+/* } */
+/**/
+.form-group label {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  color: white;
+  font-weight: 500;
+  background: transparent;
+}
+
+.form-control {
+  background-color: rgba(0, 0, 0, 0.35);
+  width: 100%;
+  padding: 0.25rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #e3e3e3;
+  background-clip: padding-box;
+  border: none;
+  border-bottom: 1px solid #ced4da;
+  border-radius: 0;
+}
+
+.form-control:focus {
+  color: #ffffff;
+  border-color: #495057;
+  outline: 0;
+}
+
+.form-control.is-invalid {
+  border-color: #dc3545;
+}
+
+.error {
+  color: #dc3545;
+  font-size: 0.875rem;
+  background: transparent;
+}

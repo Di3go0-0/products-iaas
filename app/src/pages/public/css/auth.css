@@ -1,0 +1,93 @@
+.gradient-background {
+  background: radial-gradient(ellipse at center, #2a2a2a 0%, #121212 100%);
+  background-size: 400% 400%;
+  animation: gradientAnimation 20s ease infinite;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.gradient-background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(
+      circle at 30% 30%,
+      rgba(60, 60, 60, 0.4) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      circle at 70% 70%,
+      rgba(40, 40, 40, 0.4) 0%,
+      transparent 70%
+    );
+  pointer-events: none;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Add subtle floating particles */
+.gradient-background::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(
+      circle at 10% 20%,
+      rgba(255, 255, 255, 0.01) 0%,
+      transparent 8%
+    ),
+    radial-gradient(
+      circle at 30% 70%,
+      rgba(255, 255, 255, 0.01) 0%,
+      transparent 8%
+    ),
+    radial-gradient(
+      circle at 50% 40%,
+      rgba(255, 255, 255, 0.01) 0%,
+      transparent 8%
+    ),
+    radial-gradient(
+      circle at 70% 30%,
+      rgba(255, 255, 255, 0.01) 0%,
+      transparent 8%
+    ),
+    radial-gradient(
+      circle at 90% 60%,
+      rgba(255, 255, 255, 0.01) 0%,
+      transparent 8%
+    );
+  animation: floatParticles 15s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes floatParticles {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
