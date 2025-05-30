@@ -7,7 +7,6 @@ CREATE DATABASE product_descriptions_db;
 CREATE DATABASE product_sales_db;
 CREATE DATABASE links_db;
 
--- 2. Creación de roles y asignación de contraseñas
 CREATE ROLE products_descriptions
   WITH LOGIN
   PASSWORD 'supersecret';
@@ -20,7 +19,6 @@ CREATE ROLE products_links
   WITH LOGIN
   PASSWORD 'yetanothersecret';
 
--- 3. Concesión de permisos sobre cada base de datos
 GRANT ALL PRIVILEGES ON DATABASE product_descriptions_db TO products_descriptions;
 GRANT ALL PRIVILEGES ON DATABASE product_sales_db       TO products_sales;
 GRANT ALL PRIVILEGES ON DATABASE links_db               TO products_links;
