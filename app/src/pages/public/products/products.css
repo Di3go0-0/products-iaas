@@ -1,8 +1,17 @@
 .products-page {
-  min-height: 100vh;
+  min-height: 100dvh;
   background: radial-gradient(ellipse at center, #2a2a2a 0%, #121212 100%);
   background-size: 400% 400%;
   animation: gradientAnimation 20s ease infinite;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .products-container {

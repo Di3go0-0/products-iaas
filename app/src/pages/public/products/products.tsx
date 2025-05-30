@@ -10,7 +10,6 @@ import { useProduct } from "../../../context/productsContext/Product.Context";
 
 function ProductsPage() {
   const { token } = useAuth();
-  console.log("hola");
   const {
     products,
     setToken,
@@ -23,7 +22,6 @@ function ProductsPage() {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
 
-  console.log("hola2");
   useEffect(() => {
     if (token) {
       setToken(token);
@@ -65,7 +63,6 @@ function ProductsPage() {
     setEditingProduct(null);
   };
 
-  console.log("hola1");
   return (
     <div className="products-page">
       <div className="products-container">
