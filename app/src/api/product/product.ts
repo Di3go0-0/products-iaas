@@ -16,7 +16,7 @@ export const Create = async (body: Product) => {
   return response;
 }
 export const Update = async (id: string, product: ProductFormData) => {
-  const response = await axios.put(`/${id}`, product);
+  const response = await axios.patch(`/${id}`, product);
   return response;
 }
 
