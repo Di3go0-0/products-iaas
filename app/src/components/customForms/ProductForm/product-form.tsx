@@ -93,7 +93,7 @@ export const ProductForm = ({ product, onSave, onCancel, isOpen }: Props) => {
             />
           </div>
 
-          <div className="form-row">
+          <div className="form-row price-stock">
             <div className="form-group">
               <label htmlFor="unitprice">Unit Price ($)</label>
               <input

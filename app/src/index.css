@@ -7,7 +7,7 @@
 
   font-family: Poppins, sans-serif;
   box-sizing: border-box;
-  scrollbar-color: #0c0140 #000000;
+  /* scrollbar-color: #0c0140 #000000; */
   scroll-behavior: smooth;
   scrollbar-width: thin;
 }
