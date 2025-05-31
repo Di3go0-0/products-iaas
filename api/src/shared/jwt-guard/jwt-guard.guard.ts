@@ -13,7 +13,7 @@ type verifyTokenType = {
   email: string;
   rol: string;
 };
-const uri = 'http://auth-microservice:3010/auth/verify-token?token=';
+const uri = 'http://localhost:3010/auth/verify-token?token=';
 
 @Injectable()
 export class JwtGuardGuard implements CanActivate {
