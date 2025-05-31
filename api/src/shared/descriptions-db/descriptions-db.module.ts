@@ -10,7 +10,7 @@ import { ConfigService } from '@nestjs/config';
       useFactory: (cfg: ConfigService) => ({
         type: 'postgres',
         host: 'db1.incus',
-        port: 5433,
+        port: 5432,
         database: 'product_descriptions_db',
         username: cfg.get('DESC_DB_USER'),
         password: cfg.get('DESC_DB_PASS'),
