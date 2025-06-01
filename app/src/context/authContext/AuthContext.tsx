@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }: Props) => {
     try {
       const response = await LoginRequest(user);
       const accessToken = response.data.token;
-
+      console.log(response);
       setToken(accessToken);
       setErrors({});
     } catch (e) {
