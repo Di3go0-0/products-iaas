@@ -7,6 +7,7 @@ import type {
 } from "../../types/auth.type";
 import { LoginRequest, RegisterRequest } from "../../api/auth/auth";
 import axios from "../../api/products.axios";
+import { AxiosError } from "axios";
 
 interface Props {
   children: ReactNode;
@@ -38,9 +39,19 @@ export const AuthProvider = ({ children }: Props) => {
 
       setToken(accessToken);
       setErrors({});
-    } catch (err: any) {
-      setErrors(err.response?.data || { message: "Error al iniciar sesión" });
-      setToken(null);
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        if (e.response && Array.isArray(e.response.data)) {
+          console.log(e);
+          // console.log(e.response.data);
+          return setErrors({ message: e.response.data[0] });
+        }
+        if (e.response && e.response.data?.mail) {
+          return setErrors({ mail: e.response.data.mail });
+        }
+      } else {
+        console.error("Unexpected error", e);
+      }
     }
   };
 
