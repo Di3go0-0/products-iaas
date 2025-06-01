@@ -40,9 +40,9 @@ export const AuthProvider = ({ children }: Props) => {
       setToken(accessToken);
       setErrors({});
     } catch (e) {
+      console.log(e);
       if (e instanceof AxiosError) {
         if (e.response && Array.isArray(e.response.data)) {
-          console.log(e);
           // console.log(e.response.data);
           return setErrors({ message: e.response.data[0] });
         }
