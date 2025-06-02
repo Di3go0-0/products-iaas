@@ -7,6 +7,7 @@ import type {
 } from "../../types/auth.type";
 import { LoginRequest, RegisterRequest } from "../../api/auth/auth";
 import axios from "../../api/products.axios";
+import { AxiosError } from "axios";
 
 interface Props {
   children: ReactNode;
@@ -35,24 +36,52 @@ export const AuthProvider = ({ children }: Props) => {
     try {
       const response = await LoginRequest(user);
       const accessToken = response.data.token;
-
       setToken(accessToken);
-      setErrors({});
-    } catch (err: any) {
-      setErrors(err.response?.data || { message: "Error al iniciar sesión" });
-      setToken(null);
+      setIsAuthenticated(true);
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        if (e instanceof AxiosError) {
+          if (e.response && Array.isArray(e.response.data)) {
+            // console.log(e.response.data);
+            return setErrors({ message: e.response.data[0] });
+          }
+          if (e.response && e.response.status == 401) {
+            setErrors({ password: e.response.data.message });
+            console.log(e.response.data);
+          }
+          if (e.response && e.response.status == 404) {
+            setErrors({ mail: e.response.data.message });
+            console.log(e.response.data.message);
+          }
+        }
+      } else {
+        console.error("Unexpected error", e);
+      }
     }
   };
 
   const SignUp = async (user: RegisterType) => {
     try {
       const response = await RegisterRequest(user);
+
       if (response.status === 201) {
         setIsRegistered(true);
         setErrors({});
       }
-    } catch (err: any) {
-      setErrors(err.response?.data || { message: "Error al registrarse" });
+    } catch (e: any) {
+      if (e instanceof AxiosError) {
+        if (e instanceof AxiosError) {
+          if (e.response && Array.isArray(e.response.data)) {
+            return setErrors({ message: e.response.data[0] });
+          }
+          if (e.response && e.response.data?.email) {
+            setErrors({ mail: e.response.data.email });
+            console.log(e.response.data.email);
+          }
+        }
+      } else {
+        console.error("Unexpected error", e);
+      }
     }
   };
 
