@@ -9,11 +9,11 @@ import { ConfigService } from '@nestjs/config';
       inject: [ConfigService],
       useFactory: (cfg: ConfigService) => ({
         type: 'postgres',
-        host: '10.101.90.83',
-        port: 5432,
-        database: 'product_descriptions_db',
+        host: cfg.get<string>('MASTER_DB_HOST'),
+        port: parseInt(cfg.get<string>('MASTER_DB_PORT') ?? '5432', 10),
         username: cfg.get('DESC_DB_USER'),
         password: cfg.get('DESC_DB_PASS'),
+        database: 'product_descriptions_db',
         entities: [__dirname + '/../descriptions/*.entity{.ts,.js}'],
         synchronize: true,
       }),
@@ -21,4 +21,5 @@ import { ConfigService } from '@nestjs/config';
   ],
   exports: [TypeOrmModule],
 })
-export class DescriptionsDbModule {}
+export class DescriptionsDbModule { }
+
