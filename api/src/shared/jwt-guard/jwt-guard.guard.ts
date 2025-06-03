@@ -13,12 +13,12 @@ type verifyTokenType = {
   email: string;
   rol: string;
 };
-const uri = 'http://10.101.90.23:3010/auth/verify-token?token=';
+const uri = 'http://10.221.217.20:3010/auth/verify-token?token=';
 
 @Injectable()
 export class JwtGuardGuard implements CanActivate {
   private readonly logger = new Logger(JwtGuardGuard.name);
-  constructor(private readonly axiosService: AxiosService) {}
+  constructor(private readonly axiosService: AxiosService) { }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest<Request>();
